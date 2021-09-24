@@ -14,7 +14,7 @@ $tasks = array_slice($all_tasks, $pagination_start, $pagination_size);
 <div class="container mt-5">
     <h1>Панель Администратора</h1>
     <h4>Все задачи</h4>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
             <th scope="col">№</th>
@@ -35,15 +35,17 @@ $tasks = array_slice($all_tasks, $pagination_start, $pagination_size);
                 <td><?= $task['task_text'] ?></td>
                 <td><?= $task['status'] ? 'Выполнено' : 'Не выполнено' ?></td>
                 <td>
-                    <button class="btn btn-info">
+                    <a href="?controller=admin&action=edit&task=<?= $task['id']; ?>" class="btn btn-info">
                         Редактировать
-                    </button>
+                    </a>
                 </td>
+                <?php if (!$task['status']):?>
                 <td>
-                    <button class="btn btn-success">
-                        Выполнено
+                    <a href="?controller=admin&action=complete&task=<?= $task['id']; ?>" class="btn btn-success">
+                        Завершить
                     </button>
                 </td>
+                <?php endif;?>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -51,17 +53,17 @@ $tasks = array_slice($all_tasks, $pagination_start, $pagination_size);
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item <?php if($pagination_start-3 < 0 ): echo 'disabled'; ?>  <?php endif; ?>">
-                <a class="page-link" href="?controller=admin&action=index&pagination_start=<?=$pagination_start-3 ?>">Предыдущая</a>
+                <a class="page-link" href="?controller=admin&action=index&sort=<?=$sortby ?>&pagination_start=<?=$pagination_start-3 ?>">Предыдущая</a>
             </li>
             <?php for ($i=0, $key = 1; $i < $pagination_array_length; $i+=3, $key++) { ?>
                 <li class="page-item <?php if($pagination_start == $i): echo 'active'; ?>  <?php endif; ?>">
-                    <a class="page-link" href="?controller=admin&action=index&pagination_start=<?=$i ?>">
+                    <a class="page-link" href="?controller=admin&action=index&sort=<?=$sortby ?>&pagination_start=<?=$i ?>">
                         <?= $key; ?>
                     </a>
                 </li>
            <?php }?>
             <li class="page-item <?php if($pagination_start+3 > count($all_tasks)): echo 'disabled'; ?>  <?php endif; ?>">
-                <a class="page-link"  href="?controller=admin&action=index&pagination_start=<?=$pagination_start+3 ?>">Следующая</a>
+                <a class="page-link"  href="?controller=admin&action=index&sort=<?=$sortby ?>&pagination_start=<?=$pagination_start+3 ?>">Следующая</a>
             </li>
         </ul>
     </nav>

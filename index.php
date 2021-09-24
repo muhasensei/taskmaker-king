@@ -13,11 +13,10 @@
 <body>
 <nav class="navbar navbar-light bg-light">
   <div class="container">
-    <?php if (!$_SESSION["isAdmin"]): ?>
-      <a class="btn btn-success" href="/">
-        Главная
-      </a>
-    <?php else: ?>
+    <a class="btn btn-success" href="/">
+      Главная
+    </a>
+    <?php if ($_SESSION["isAdmin"]): ?>
       <a class="btn btn-success" href="?controller=admin&action=index">
         Панель админа
       </a>
