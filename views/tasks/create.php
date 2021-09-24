@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h3>
-    Creating a task
+    Создание задачи
     </h3>
     <form action="?controller=main&action=store" method="post">
         <div class="mb-3">

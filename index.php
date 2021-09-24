@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,19 +13,33 @@
 <body>
 <nav class="navbar navbar-light bg-light">
   <div class="container">
-    <a class="btn btn-success" href="/">
-      Главная
-    </a>
-    <a class="btn btn-outline-success" href="#">
-      Войти как Администратор
-    </a>
+    <?php if (!$_SESSION["isAdmin"]): ?>
+      <a class="btn btn-success" href="/">
+        Главная
+      </a>
+    <?php else: ?>
+      <a class="btn btn-success" href="?controller=admin&action=index">
+        Панель админа
+      </a>
+    <?php endif; ?>
+    <?php if (!$_SESSION["isAdmin"]): ?>
+      <a class="btn btn-outline-success" href="?controller=admin&action=login">
+        Войти как Администратор
+      </a>
+    <?php else: ?>
+      <a class="btn btn-outline-danger" href="?controller=admin&action=logout">
+        Выйти
+      </a>
+    <?php endif; ?>
   </div>
 </nav>
+
+
 <?
   switch($_GET['controller'])
   { 
     case "admin" :
-        include "views/admin.php";
+        include "controllers/admin/AdminController.php";
         break;
     default : 
         include "controllers/main/MainController.php"; 
