@@ -48,6 +48,9 @@
         public function complete($conn){
             $model = new Task();
             $model->complete($conn, $_GET['task']);
+            echo '<script type="text/javascript">
+            window.location = "/"
+        </script>';
         }
 
     }

@@ -1,6 +1,6 @@
 <?php
 
-$sortby = $_GET['sort'] ? $_GET['sort'] : 'user_name';
+$sortby = $_GET['sort'] ? $_GET['sort'] : 'status';
 include 'functions/sort.php';
 $all_tasks = array_sort($all_tasks, $sortby, SORT_ASC);
 
@@ -18,6 +18,7 @@ $tasks = array_slice($all_tasks, $pagination_start, $pagination_size);
     <?php endif;?>
     <a href="?controller=main&action=create" class="btn btn-primary  mt-2">Создать задачу</a>
     <h4 class="mt-2">Все задачи</h4>
+    <?php if ($pagination_array_length > 0): ?>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -75,4 +76,8 @@ $tasks = array_slice($all_tasks, $pagination_start, $pagination_size);
             </li>
         </ul>
     </nav>
+    <?php else:?>
+        <p>Пока задач нету</p>
+    <?php endif;?>
+
 </div>
