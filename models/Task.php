@@ -51,7 +51,7 @@ class Task {
   public function complete($conn, $task_id){
     $updating_task = "UPDATE tasks SET status=true WHERE id = '$task_id'";
     if (mysqli_query($conn, $updating_task)) {
-      echo "<div class='container'>Задача выполнена</div>";
+      echo "<div class='container'>Статус задачи теперь выполнена</div>";
     } else {
       echo "Error: " . $updating_task . "<br>" . mysqli_error($conn);
     }

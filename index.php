@@ -16,11 +16,6 @@
     <a class="btn btn-success" href="/">
       Главная
     </a>
-    <?php if ($_SESSION["isAdmin"]): ?>
-      <a class="btn btn-success" href="?controller=admin&action=index">
-        Панель админа
-      </a>
-    <?php endif; ?>
     <?php if (!$_SESSION["isAdmin"]): ?>
       <a class="btn btn-outline-success" href="?controller=admin&action=login">
         Войти как Администратор
