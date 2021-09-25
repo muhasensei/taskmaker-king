@@ -1,5 +1,5 @@
 <?php 
-    include 'db_connection.php';
+    include 'functions/db_connection.php';
     include 'models/Task.php';
 
     class MainController{
