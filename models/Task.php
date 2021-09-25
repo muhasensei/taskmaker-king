@@ -7,6 +7,15 @@ class Task {
   public $user_name;
   public $taks_text;
   public $status;
+
+  public function validate($user_name, $email, $task_text){
+    if($user_name && $email && $task_text) {
+      if(is_string($user_name) && is_string($email) && is_string($task_text)) {
+        return true;
+      }
+    }
+    return false;
+  }
   
   public function getAllTasks($conn){
       $query = 'SELECT * FROM tasks';
@@ -20,6 +29,10 @@ class Task {
   }
 
   public function create($conn, $user_name, $email, $task_text){
+    if (!$this->validate($user_name, $email, $task_text)) {
+      print("Неправильные данные");
+      return false;
+    }
     $creating_task = "INSERT INTO tasks (user_name, email, task_text) VALUES('$user_name', '$email', '$task_text')";
     if (mysqli_query($conn, $creating_task)) {
       echo "<div class='container'>Новая задача добавлена</div>";
@@ -39,6 +52,10 @@ class Task {
   }
 
   public function update($conn, $task_id, $user_name, $email, $task_text){
+    if (!$this->validate($user_name, $email, $task_text)) {
+      print("Неправильные данные");
+      return false;
+    }
     $updating_task = "UPDATE tasks SET user_name='$user_name', email='$email', task_text='$task_text' WHERE id = '$task_id'";
     if (mysqli_query($conn, $updating_task)) {
       echo "<div class='container'>Задача изменена</div>";
